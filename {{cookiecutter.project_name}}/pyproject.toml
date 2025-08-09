@@ -1,0 +1,81 @@
+[project]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.project_description }}"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
+]
+
+[project.urls]
+repository = "https://github.disney.com/DLP-WFI-Etudes-Optimisation/{{ cookiecutter.project_name }}"
+
+[tool.uv]
+default-groups = "all"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests/"]
+markers = [
+    "app: Application related tests.",
+    "ml: Machine Learning related tests.",
+    "data: Data related tests."
+]
+
+[tool.black]
+line-length = 200
+
+[tool.ruff]
+line-length = 200
+include = ["*.py", "**/pyproject.toml"]
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+ignore = [
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
+    "E501", # line too long, handled by black
+]
+select = ["E", "F", "W", "C", "B", "I001"]
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv"
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 200
+
+[tool.ty.rules]
+index-out-of-bounds = "ignore"
+unused-ignore-comment = "warn"
+redundant-cast = "ignore"
+possibly-unbound-attribute = "error"
+possibly-unbound-import = "error"
